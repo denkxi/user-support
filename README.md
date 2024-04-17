@@ -15,8 +15,8 @@ The server-side functionality of the application is tested in the `Tests/Control
 
 ## Preview
 
-- **Creating new appeal**
+### Creating new appeal
 ![Create preview](create_preview.png)
 
-- **List of active appeals**
+### List of active appeals
 ![Create preview](list_preview.png)
