@@ -1,0 +1,48 @@
+﻿@model IEnumerable<WebApp.Domain.Appeal>
+
+@{
+    ViewData["Title"] = "Active appeals";
+}
+<div class="w-75 m-auto mt-5">
+    <h1 class="text-center m-auto">Active appeals</h1>
+    <p class="m-auto">
+        <a asp-action="Create" class="btn btn-outline-primary">Create New</a>
+    </p>
+
+    <table class="table m-auto">
+        <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EntryTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ResolutionDeadline)
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            var classItem = DateTime.Now > item.ResolutionDeadline.AddHours(-1) ? "alert-danger" : "alert-heading";
+            <tr class="@classItem">
+                <td>
+                    @Html.Raw(item.EntryTime.ToString("HH:mm dd.MM.yyyy"))
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.Raw(item.ResolutionDeadline.ToString("HH:mm dd.MM.yyyy"))
+                </td>
+                <td>
+                    <a asp-action="Resolve" asp-route-id="@item.Id" class="btn btn-outline-success">Mark as Resolved</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
